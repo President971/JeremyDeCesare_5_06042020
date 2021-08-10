@@ -84,13 +84,24 @@
       <div class="container px-4 px-lg-5 mt-5">
         <div
           class="
-            products
             row
             gx-4 gx-lg-5
             row-cols-2 row-cols-md-3 row-cols-xl-4
             justify-content-center
           "
+          id="card"
         >
+          <template id="templateArticles">
+            <div class="card" style="width: 18rem">
+              <img src="localhost:3000/api/teddies" class="card-img-top" alt="" id="cardImg"/>
+              <div class="card-body">
+                <h5 class="card-title" id="cardTitle"></h5>
+                <p class="card-text" id="cardBody"></p>
+                <a href="#" class="btn btn-primary" id="cardPanier">Mettre au Panier</a>
+              </div>
+            </div>
+          </template>
+        </div>
       </div>
     </section>
     <!-- Footer-->

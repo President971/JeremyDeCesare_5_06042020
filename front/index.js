@@ -1,47 +1,31 @@
-getArticles();
+main()
 
-// Récupérer les articles depuis l'API
-function getArticles() {
-  fetch("http://localhost:3000/api/teddies")
-    .then(function (res) {
-      console.log( res.json());
-    })
-    .then(function (res) {
-      const articles = res
-      for (let article in articles) {
-        let productCard = document.createElement("div");
-        document.querySelector(".products").appendChild(productCard);
-        productCard.classList.add("card h-100");
+    async function main() {
+      const articles = await getArticles()
+      for (article of articles) {
+      displayArticles(article)
+     }
+    }
 
-        let productLink = document.createElement("a");
-        productCard.appendChild(productLink);
-        productLink.href = `product.html?id=${resultatAPI[article]._id}`;
-        productLink.classList.add("stretched-link");
-
-        let productImgDiv = document.createElement("div");
-        productLink.appendChild(productImgDiv);
-        productImgDiv.classList.add("product__img");
-
-        let productImg = document.createElement("img");
-        productImgDiv.appendChild(productImg);
-        productImg.src = resultatAPI[article].imageUrl;
-
-        let productInfosDiv = document.createElement("div");
-        productLink.appendChild(productInfosDiv);
-        productInfosDiv.classList.add("product__infos");
-
-        let productInfoTitle = document.createElement("div");
-        productInfosDiv.appendChild(productInfoTitle);
-        productInfoTitle.classList.add("product__infos__title");
-        productInfoTitle.innerHTML = resultatAPI[article].name;
-
-        let productInfoPrice = document.createElement("div");
-        productInfosDiv.appendChild(productInfoPrice);
-        productInfoPrice.classList.add("product__infos__price");
-      }
-    })
-    .catch((error) => {
-      let productsContainer = document.querySelector(".products");
-      productsContainer.innerHTML =
-        "Nous n'avons pas réussi à afficher nos nounours.";
-    })}
+    function getArticles() {
+      return fetch("http://localhost:3000/api/teddies")
+      .then(function (res) {
+      return res.json()
+      })
+      .then(function(articles){
+        return articles
+      })
+      .catch(function(error){
+        alert(error)
+      })
+    }
+    function displayArticles(article) {
+      const templateElt = document.getElementById("templateArticles")
+      const cloneElt = document.importNode(templateElt.content, true)
+      cloneElt.getElementById("cardImg").document = article.imageUrl;
+      cloneElt.getElementById("cardTitle").textContent = article.name
+      cloneElt.getElementById("cardBody").textContent = article.description
+      cloneElt.getElementById("cardPanier").href += "?id=" + article._id
+    
+      document.getElementById("card").appendChild(cloneElt)
+    }
