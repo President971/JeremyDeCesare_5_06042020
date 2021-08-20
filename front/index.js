@@ -12,9 +12,6 @@ main()
       .then(function (res) {
       return res.json()
       })
-      .then(function(articles){
-        return articles
-      })
       .catch(function(error){
         alert(error)
       })
@@ -22,10 +19,12 @@ main()
     function displayArticles(article) {
       const templateElt = document.getElementById("templateArticles")
       const cloneElt = document.importNode(templateElt.content, true)
-      cloneElt.getElementById("cardImg").document = article.imageUrl;
+      cloneElt.getElementById("cardImg").src = article.imageUrl;
       cloneElt.getElementById("cardTitle").textContent = article.name
       cloneElt.getElementById("cardBody").textContent = article.description
+      cloneElt.getElementById("cardPrice").textContent = article.price /100 + " €"
       cloneElt.getElementById("cardPanier").href += "?id=" + article._id
-    
       document.getElementById("card").appendChild(cloneElt)
     }
+
+    
