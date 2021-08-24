@@ -23,7 +23,9 @@
     <!-- Navigation-->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
       <div class="container px-4 px-lg-5">
-        <a class="navbar-brand" href="http://127.0.0.1:5500/index.html">Accueil</a>
+        <a class="navbar-brand" href="http://127.0.0.1:5500/front/index.html#!"
+          >Accueil</a
+        >
         <button
           class="navbar-toggler"
           type="button"
@@ -39,23 +41,6 @@
           <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
             <li class="nav-item">
               <a class="nav-link active" aria-current="page" href="#!">Home</a>
-            </li>
-            <li class="nav-item dropdown">
-              <a
-                class="nav-link dropdown-toggle"
-                id="navbarDropdown"
-                href="#"
-                role="button"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-                >Shop</a
-              >
-              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <li><a class="dropdown-item" href="#!">All Products</a></li>
-                <li><hr class="dropdown-divider" /></li>
-                <li><a class="dropdown-item" href="#!">Popular Items</a></li>
-                <li><a class="dropdown-item" href="#!">New Arrivals</a></li>
-              </ul>
             </li>
           </ul>
           <form class="d-flex">
@@ -91,13 +76,29 @@
           "
           id="card"
         >
-            <div class="card" style="width: 18rem">
-              <img src="localhost:3000/api/teddies" class="card-img-top" alt="" id="cardImg"/>
-              <div class="card-body">
-                <h5 class="card-title" id="cardTitle"></h5>
-                <p class="card-text" id="cardBody"></p>
+          <div class="card p-3" style="width: 18rem">
+            <img
+              src="localhost:3000/api/teddies"
+              class="card-img-top"
+              alt=""
+              id="cardImg"
+            />
+            <div class="card-body">
+              <h5 class="card-title" id="cardTitle"></h5>
+              <p class="card-text" id="cardBody"></p>
+              <p class="card-text" id="cardPrice"></p>
+              <div class="grid w-full gap-4 mt-4">
+                <div class="product-card__infos__color">
+                  <label for="color-select"> Couleur :</label>
+                  <select name="color" id="productColor">
+                  </select>
+                  <div>
+                  <a href="index.html" class="btn btn-primary m-2" id="cardPanier" id="article_link">Revenir aux Nounours</a>
+                  <a href="index.html" class="btn btn-secondary m-2" id="cardPanier" id="article_link">Ajouter au panier</a>
+                </div>
               </div>
-            </div>
+              </div>
+          </div>
         </div>
       </div>
     </section>

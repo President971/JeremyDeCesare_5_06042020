@@ -39,24 +39,6 @@
           <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
             <li class="nav-item">
               <a class="nav-link active" aria-current="page" href="#!">Home</a>
-            </li>
-            <li class="nav-item dropdown">
-              <a
-                class="nav-link dropdown-toggle"
-                id="navbarDropdown"
-                href="#"
-                role="button"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-                >Shop</a
-              >
-              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <li><a class="dropdown-item" href="#!">All Products</a></li>
-                <li><hr class="dropdown-divider" /></li>
-                <li><a class="dropdown-item" href="#!">Popular Items</a></li>
-                <li><a class="dropdown-item" href="#!">New Arrivals</a></li>
-              </ul>
-            </li>
           </ul>
           <form class="d-flex">
             <button class="btn btn-outline-dark" type="submit">
@@ -92,7 +74,7 @@
           id="card"
         >
           <template id="templateArticles">
-            <div class="card" style="width: 18rem">
+            <div class="card p-3 m-3" style="width: 18rem">
               <img src="localhost:3000/api/teddies" class="card-img-top" alt="" id="cardImg"/>
               <div class="card-body">
                 <h5 class="card-title" id="cardTitle"></h5>
