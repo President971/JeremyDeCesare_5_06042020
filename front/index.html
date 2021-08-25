@@ -23,7 +23,7 @@
     <!-- Navigation-->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
       <div class="container px-4 px-lg-5">
-        <a class="navbar-brand" href="#!">Accueil</a>
+        <a class="navbar-brand">Accueil</a>
         <button
           class="navbar-toggler"
           type="button"
@@ -38,10 +38,11 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="#!">Home</a>
+              <a class="nav-link active" aria-current="page">Home</a>
+            </li>
           </ul>
           <form class="d-flex">
-             <button href="cart.html" class="btn btn-outline-dark" type="submit">
+            <button class="btn btn-outline-dark" type="submit">
               <i class="bi-cart-fill me-1"></i>
               Cart
               <span class="badge bg-dark text-white ms-1 rounded-pill">0</span>
@@ -75,12 +76,23 @@
         >
           <template id="templateArticles">
             <div class="card p-3 m-3" style="width: 18rem">
-              <img src="localhost:3000/api/teddies" class="card-img-top" alt="" id="cardImg"/>
+              <img
+                src="localhost:3000/api/teddies"
+                class="card-img-top"
+                alt=""
+                id="cardImg"
+              />
               <div class="card-body">
                 <h5 class="card-title" id="cardTitle"></h5>
                 <p class="card-text" id="cardBody"></p>
                 <p class="card-price" id="cardPrice"></p>
-                <a href="article.html" class="btn btn-primary" id="cardPanier" id="article_link">Voir L'article</a>
+                <a
+                  href="article.html"
+                  class="btn btn-primary"
+                  id="cardPanier"
+                  id="article_link"
+                  >Voir L'article</a
+                >
               </div>
             </div>
           </template>
