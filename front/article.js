@@ -34,3 +34,29 @@ function hydrateArticle(article){
 }
 }
 
+  // Add event listeners on button
+  document.getElementById('addToCart').onclick = (event) => {
+    event.preventDefault()
+    Cart.addProduct(article)
+    redirectToShoppingCart(article.name)
+  }
+
+  // Get parent element
+  const colorsElt = document.getElementById('productColor')
+
+  // Display all colors
+  product.colors.forEach((color) => {
+    // Get & clone template for one color
+    const templateElt = document.getElementById('productColor')
+    const cloneElt = document.importNode(templateElt.content, true)
+
+    // Hydrate color clone
+    cloneElt.querySelector('div').style.backgroundColor = color
+
+    // Display a new color
+    colorsElt.appendChild(cloneElt)
+  })
+
+function redirectToShoppingCart(articleName) {
+  window.location.href = `${window.location.origin}/cart.html?lastAddedProductName=${articleName}`
+}
