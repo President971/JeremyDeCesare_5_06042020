@@ -33,30 +33,50 @@ function hydrateArticle(article){
    colorSelect.appendChild(option);
 }
 }
+//la gestion du panier , recupération des données
+const idColor = document.querySelector("#productColor");
 
-  // Add event listeners on button
-  document.getElementById('addToCart').onclick = (event) => {
-    event.preventDefault()
-    Cart.addProduct(article)
-    redirectToShoppingCart(article.name)
+//mettre le choix dans une variable
+
+const choixColor = idColor.Value;
+console.log(choixColor);
+
+//selection du bouton ajouter au panier et l'ecouter
+
+const btn_envoyerPanier = document.querySelector("#addToCart");
+
+btn_envoyerPanier.addEventListener("click", (event)=>{
+  event.preventDefault();
+
+  let produit = {
+    name: cardTitle.textContent,
+    price: cardPrice.textContent,
   }
+  ///-----local storage
+  ///-- declaration variable ou je met les key et verification si présence de clé dans le local
+ let produitLocalStorage = JSON.parse(localStorage.getItem("produit"));
+ console.log(produitLocalStorage);
 
-  // Get parent element
-  const colorsElt = document.getElementById('productColor')
-
-  // Display all colors
-  product.colors.forEach((color) => {
-    // Get & clone template for one color
-    const templateElt = document.getElementById('productColor')
-    const cloneElt = document.importNode(templateElt.content, true)
-
-    // Hydrate color clone
-    cloneElt.querySelector('div').style.backgroundColor = color
-
-    // Display a new color
-    colorsElt.appendChild(cloneElt)
-  })
-
-function redirectToShoppingCart(articleName) {
-  window.location.href = `${window.location.origin}/cart.html?lastAddedProductName=${articleName}`
-}
+ //---Fenete de confirmation 
+ const popupConfirmation = () =>{
+   if(window.confirm( `${cardTitle.textContent} à bien été au panier 
+   Aller au Panier OK ou revenir a l'acceuil ANNULER`)){
+window.location.href = "cart.html";
+   }else{
+    window.location.href = "index.html";
+   }
+ }
+ //--- si local pas vide
+ if(produitLocalStorage){
+  produitLocalStorage.push(produit);
+  localStorage.setItem("produit", JSON.stringify(produitLocalStorage))
+  popupConfirmation()
+ } //---si il n'y pas pas de key dans le local
+ else{
+  produitLocalStorage = [];
+  produitLocalStorage.push(produit);
+  localStorage.setItem("produit", JSON.stringify(produitLocalStorage))
+  console.log(produitLocalStorage);
+  popupConfirmation()
+ }
+});
