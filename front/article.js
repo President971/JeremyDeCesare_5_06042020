@@ -55,8 +55,6 @@ btn_envoyerPanier.addEventListener("click", (event)=>{
   ///-----local storage
   ///-- declaration variable ou je met les key et verification si présence de clé dans le local
  let produitLocalStorage = JSON.parse(localStorage.getItem("produit"));
- console.log(produitLocalStorage);
-
  //---Fenete de confirmation 
  const popupConfirmation = () =>{
    if(window.confirm( `${cardTitle.textContent} à bien été au panier 
