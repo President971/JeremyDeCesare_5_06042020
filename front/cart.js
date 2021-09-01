@@ -41,3 +41,54 @@ if(produitLocalStorage === null) {
   }
   )
 }
+
+//--------Montant total du Panier------
+
+let prixTotalCalcul = [];
+
+for (k = 0; k < produitLocalStorage.length; k++){
+  let prixProduitPanier = produitLocalStorage[k].price
+  //--Mise en place des prix dans un tableau pour le total
+  prixTotalCalcul.push(prixProduitPanier)
+}
+//----Addition des prix du tableau avec .reduce
+const reducer = (accumulator, currentValue) => accumulator + currentValue;
+const prixTotal = prixTotalCalcul.reduce(reducer);
+console.log(prixTotal);
+
+//----Html du Total
+const affichagePrixTotal = ` <div> Le prix total est de : ${prixTotal} € </div>
+`
+positionProduit.insertAdjacentHTML("afterend", affichagePrixTotal);
+
+
+//----------------- Recupération du Formulaire pour mettre dans le local storage-----------------
+const btnEnvoiFormulaire = document.querySelector("#btnformulaire");
+
+btnEnvoiFormulaire.addEventListener("click", (e) => {
+  e.preventDefault();
+  const formulaireValues = {
+    Nom : document.querySelector("#validationCustom01").value,
+    Prenom: document.querySelector("#validationCustom02").value,
+    Adresse: document.querySelector("#validationCustom03").value,
+    Ville: document.querySelector("#validationCustom04").value,
+    Email: document.querySelector("#validationCustom05").value
+  }
+
+  localStorage.setItem("formulaireValues", JSON.stringify(formulaireValues))
+  //------ Commande + Formulaire à envoyer
+const envoiCommandeServeur = {
+  produitLocalStorage,
+  formulaireValues
+}
+
+
+
+
+
+
+
+
+
+
+

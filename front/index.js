@@ -22,7 +22,7 @@ main()
       cloneElt.getElementById("cardImg").src = article.imageUrl;
       cloneElt.getElementById("cardTitle").textContent = article.name
       cloneElt.getElementById("cardBody").textContent = article.description
-      cloneElt.getElementById("cardPrice").textContent = article.price /100 + " €"
+      cloneElt.getElementById("cardPrice").textContent = `${article.price / 100}.00 €`
       cloneElt.getElementById("cardPanier").href += "?id=" + article._id
       document.getElementById("card").appendChild(cloneElt)
     }
