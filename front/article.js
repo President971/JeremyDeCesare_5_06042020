@@ -57,7 +57,7 @@ btn_envoyerPanier.addEventListener("click", (event)=>{
  let produitLocalStorage = JSON.parse(localStorage.getItem("produit"));
  //---Fenete de confirmation 
  const popupConfirmation = () =>{
-   if(window.confirm( `${cardTitle.textContent} à bien été au panier 
+   if(window.confirm( `${cardTitle.textContent} à bien été ajouté au panier 
    Aller au Panier OK ou revenir a l'acceuil ANNULER`)){
 window.location.href = "cart.html";
    }else{
