@@ -1,5 +1,5 @@
-let produitLocalStorage = JSON.parse(localStorage.getItem("produit"));
-console.log(produitLocalStorage);
+let products = JSON.parse(localStorage.getItem("products"));
+console.log(products);
 
 //------Endroit ou j'inject le HTML
 const positionProduit = document.querySelector("#tableProduit");
@@ -7,7 +7,7 @@ const positionTable = document.querySelector("#tableau");
 //-------Affichage des produits du Panier----
 
 // Si Panier est vide
-if (produitLocalStorage === null) {
+if (products === null) {
   const panierVide = `<h2>Votre panier est vide. <a href="index.html">Remplissez le d'abord !</a></h2>`;
   positionProduit.innerHTML = panierVide;
   let Table = document.getElementById("tableau");
@@ -16,17 +16,17 @@ if (produitLocalStorage === null) {
   ///si le panier est pas vide
   let produitPanier = [];
 
-  for (j = 0; j < produitLocalStorage.length; j++) {
+  for (j = 0; j < products.length; j++) {
     produitPanier =
       produitPanier +
       `          
         <tr>
-        <td>${produitLocalStorage[j].name} </td>
-        <td>${produitLocalStorage[j].price}</td>
+        <td>${products[j].name} </td>
+        <td>${products[j].price}</td>
         </tr>
       `;
   }
-  if (j == produitLocalStorage.length)
+  if (j == products.length)
     positionProduit.innerHTML = produitPanier;
 
   //---Creation Button vider le Panier si non null
@@ -37,15 +37,15 @@ if (produitLocalStorage === null) {
   //----Suppression de la Key du local Storage
 
   btnclear.addEventListener("click", () => {
-    localStorage.removeItem("produit");
+    localStorage.removeItem("products");
     window.location.href = "cart.html";
   });
 }
 
 //--------Montant total du Panier------
 let prixTotalCalcul = [];
-for (k = 0; k < produitLocalStorage.length; k++) {
-  let prixProduitPanier = parseFloat (produitLocalStorage[k].price);
+for (k = 0; k < products.length; k++) {
+  let prixProduitPanier = parseFloat (products[k].price);
   //--Mise en place des prix dans un tableau pour le total
   prixTotalCalcul.push(prixProduitPanier);
 }
@@ -64,10 +64,10 @@ positionProduit.insertAdjacentHTML("afterend", affichagePrixTotal);
 const btnEnvoiFormulaire = document.querySelector("#btnformulaire");
 btnEnvoiFormulaire.addEventListener("click", (e) => {
   e.preventDefault();
-  const formulaireValues = {
+  const contact = {
     firstName: document.querySelector("#validationCustom01").value,
     lastName: document.querySelector("#validationCustom02").value,
-    adress: document.querySelector("#validationCustom03").value,
+    address: document.querySelector("#validationCustom03").value,
     city : document.querySelector("#validationCustom04").value,
     email: document.querySelector("#validationCustom05").value,
   };
@@ -87,7 +87,7 @@ btnEnvoiFormulaire.addEventListener("click", (e) => {
   };
 
   function nomControle() {
-    const leNom = formulaireValues.firstName;
+    const leNom = contact.firstName;
     if (regexNomPrenomVille(leNom)) {
       return true;
     } else {
@@ -96,7 +96,7 @@ btnEnvoiFormulaire.addEventListener("click", (e) => {
     }
   }
   function prenomControle() {
-    const lePrenom = formulaireValues.lastName;
+    const lePrenom = contact.lastName;
     if (regexNomPrenomVille(lePrenom)) {
       return true;
     } else {
@@ -105,7 +105,7 @@ btnEnvoiFormulaire.addEventListener("click", (e) => {
     }
   }
   function villeControle() {
-    const laVille = formulaireValues.city;
+    const laVille = contact.city;
     if (regexNomPrenomVille(laVille)) {
       return true;
     } else {
@@ -115,7 +115,7 @@ btnEnvoiFormulaire.addEventListener("click", (e) => {
   }
 
   function adresseControle() {
-    const lAdresse = formulaireValues.adress;
+    const lAdresse = contact.address;
     if (regexAdresse(lAdresse)) {
       return true;
     } else {
@@ -125,7 +125,7 @@ btnEnvoiFormulaire.addEventListener("click", (e) => {
   }
 
   function emailControle() {
-    const lEmail = formulaireValues.email;
+    const lEmail = contact.email;
     if (regexEmail(lEmail)) {
       return true;
     } else {
@@ -135,21 +135,22 @@ btnEnvoiFormulaire.addEventListener("click", (e) => {
   }
   //-----Verification globale avant envoie
   if (nomControle() && prenomControle() && villeControle() && adresseControle () && emailControle()) {
-    localStorage.setItem("formulaireValues", JSON.stringify(formulaireValues));
+    localStorage.setItem("contact", JSON.stringify(contact));
   } else {
     alert("Veuillez bien remplir le formulaire");
   }
   //------ Commande + Formulaire à envoyer
   const envoiCommandeServeur = {
-    produitLocalStorage,
-    formulaireValues,
+    contact,
+    products,
   };
     //Envoie vers le Serveur
-    const envoieServeur = fetch("http://localhost:3000/order", {
+    const envoieServeur = fetch("http://localhost:3000/api/teddies/order", {
         method: "POST",
         body: JSON.stringify(envoiCommandeServeur),
         headers: {
-          "Content-Type" : "application/json",
+          'Content-Type': 'application/json; charset=utf-8',
         },
     }); 
+    console.log(envoieServeur);
 });
