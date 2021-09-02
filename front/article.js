@@ -23,7 +23,7 @@ function hydrateArticle(article){
  document.getElementById("cardImg").src = article.imageUrl;
  document.getElementById("cardTitle").textContent = article.name
  document.getElementById("cardBody").textContent = article.description
- document.getElementById("cardPrice").textContent = `${article.price / 100}.00 €`
+ document.getElementById("cardPrice").textContent = `${article.price / 100} €`
  document.getElementById('productColor').style.gridTemplateRows = `repeat(${article.colors.length}, 1fr)`
 
  let colorSelect = document.getElementById("productColor");

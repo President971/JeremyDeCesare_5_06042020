@@ -21,7 +21,7 @@ if (produitLocalStorage === null) {
       produitPanier +
       `          
         <tr>
-        <td>${produitLocalStorage[j].name}</td>
+        <td>${produitLocalStorage[j].name} </td>
         <td>${produitLocalStorage[j].price}</td>
         </tr>
       `;
@@ -43,14 +43,13 @@ if (produitLocalStorage === null) {
 }
 
 //--------Montant total du Panier------
-
 let prixTotalCalcul = [];
-
 for (k = 0; k < produitLocalStorage.length; k++) {
-  let prixProduitPanier = produitLocalStorage[k].price;
+  let prixProduitPanier = parseFloat (produitLocalStorage[k].price);
   //--Mise en place des prix dans un tableau pour le total
   prixTotalCalcul.push(prixProduitPanier);
 }
+
 //----Addition des prix du tableau avec .reduce
 const reducer = (accumulator, currentValue) => accumulator + currentValue;
 const prixTotal = prixTotalCalcul.reduce(reducer);
@@ -63,15 +62,14 @@ positionProduit.insertAdjacentHTML("afterend", affichagePrixTotal);
 
 //----------------- Recupération du Formulaire pour mettre dans le local storage-----------------
 const btnEnvoiFormulaire = document.querySelector("#btnformulaire");
-
 btnEnvoiFormulaire.addEventListener("click", (e) => {
   e.preventDefault();
   const formulaireValues = {
-    Nom: document.querySelector("#validationCustom01").value,
-    Prenom: document.querySelector("#validationCustom02").value,
-    Adresse: document.querySelector("#validationCustom03").value,
-    Ville: document.querySelector("#validationCustom04").value,
-    Email: document.querySelector("#validationCustom05").value,
+    firstName: document.querySelector("#validationCustom01").value,
+    lastName: document.querySelector("#validationCustom02").value,
+    adress: document.querySelector("#validationCustom03").value,
+    city : document.querySelector("#validationCustom04").value,
+    email: document.querySelector("#validationCustom05").value,
   };
   //---------------Controle Validation du Formulaire
   //----------------Regex et Alert
@@ -89,7 +87,7 @@ btnEnvoiFormulaire.addEventListener("click", (e) => {
   };
 
   function nomControle() {
-    const leNom = formulaireValues.Nom;
+    const leNom = formulaireValues.firstName;
     if (regexNomPrenomVille(leNom)) {
       return true;
     } else {
@@ -98,7 +96,7 @@ btnEnvoiFormulaire.addEventListener("click", (e) => {
     }
   }
   function prenomControle() {
-    const lePrenom = formulaireValues.Prenom;
+    const lePrenom = formulaireValues.lastName;
     if (regexNomPrenomVille(lePrenom)) {
       return true;
     } else {
@@ -106,9 +104,8 @@ btnEnvoiFormulaire.addEventListener("click", (e) => {
       return false;
     }
   }
-
   function villeControle() {
-    const laVille = formulaireValues.Ville;
+    const laVille = formulaireValues.city;
     if (regexNomPrenomVille(laVille)) {
       return true;
     } else {
@@ -118,7 +115,7 @@ btnEnvoiFormulaire.addEventListener("click", (e) => {
   }
 
   function adresseControle() {
-    const lAdresse = formulaireValues.Adresse;
+    const lAdresse = formulaireValues.adress;
     if (regexAdresse(lAdresse)) {
       return true;
     } else {
@@ -128,7 +125,7 @@ btnEnvoiFormulaire.addEventListener("click", (e) => {
   }
 
   function emailControle() {
-    const lEmail = formulaireValues.Email;
+    const lEmail = formulaireValues.email;
     if (regexEmail(lEmail)) {
       return true;
     } else {
@@ -148,10 +145,11 @@ btnEnvoiFormulaire.addEventListener("click", (e) => {
     formulaireValues,
   };
     //Envoie vers le Serveur
-    const envoieServeur = fetch("http://localhost:3000/api/teddies/", {
+    const envoieServeur = fetch("http://localhost:3000/order", {
         method: "POST",
         body: JSON.stringify(envoiCommandeServeur),
-    });
-    console.log(envoiCommandeServeur);
-         
+        headers: {
+          "Content-Type" : "application/json",
+        },
+    }); 
 });
