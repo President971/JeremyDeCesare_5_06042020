@@ -1,5 +1,4 @@
-let products = JSON.parse(localStorage.getItem("products"));
-console.log(products);
+let produitLocalStorage = JSON.parse(localStorage.getItem("produitLocalStorage"));
 
 //------Endroit ou j'inject le HTML
 const positionProduit = document.querySelector("#tableProduit");
@@ -7,7 +6,7 @@ const positionTable = document.querySelector("#tableau");
 //-------Affichage des produits du Panier----
 
 // Si Panier est vide
-if (products === null) {
+if (produitLocalStorage === null) {
   const panierVide = `<h2>Votre panier est vide. <a href="index.html">Remplissez le d'abord !</a></h2>`;
   positionProduit.innerHTML = panierVide;
   let Table = document.getElementById("tableau");
@@ -16,17 +15,17 @@ if (products === null) {
   ///si le panier est pas vide
   let produitPanier = [];
 
-  for (j = 0; j < products.length; j++) {
+  for (j = 0; j < produitLocalStorage.length; j++) {
     produitPanier =
       produitPanier +
       `          
         <tr>
-        <td>${products[j].name} </td>
-        <td>${products[j].price}</td>
+        <td>${produitLocalStorage[j].name} </td>
+        <td>${produitLocalStorage[j].price}</td>
         </tr>
       `;
   }
-  if (j == products.length)
+  if (j == produitLocalStorage.length)
     positionProduit.innerHTML = produitPanier;
 
   //---Creation Button vider le Panier si non null
@@ -37,15 +36,15 @@ if (products === null) {
   //----Suppression de la Key du local Storage
 
   btnclear.addEventListener("click", () => {
-    localStorage.removeItem("products");
+    localStorage.removeItem("produitLocalStorage");
     window.location.href = "cart.html";
   });
 }
 
 //--------Montant total du Panier------
 let prixTotalCalcul = [];
-for (k = 0; k < products.length; k++) {
-  let prixProduitPanier = parseFloat (products[k].price);
+for (k = 0; k < produitLocalStorage.length; k++) {
+  let prixProduitPanier = parseFloat (produitLocalStorage[k].price);
   //--Mise en place des prix dans un tableau pour le total
   prixTotalCalcul.push(prixProduitPanier);
 }
@@ -53,17 +52,12 @@ for (k = 0; k < products.length; k++) {
 //----Addition des prix du tableau avec .reduce
 const reducer = (accumulator, currentValue) => accumulator + currentValue;
 const prixTotal = prixTotalCalcul.reduce(reducer);
-console.log(prixTotal);
-
 //----Html du Total
 const affichagePrixTotal = ` <div> Le prix total est de : ${prixTotal} € </div>
 `;
 positionProduit.insertAdjacentHTML("afterend", affichagePrixTotal);
 
 //----------------- Recupération du Formulaire pour mettre dans le local storage-----------------
-const btnEnvoiFormulaire = document.querySelector("#btnformulaire");
-btnEnvoiFormulaire.addEventListener("click", (e) => {
-  e.preventDefault();
   const contact = {
     firstName: document.querySelector("#validationCustom01").value,
     lastName: document.querySelector("#validationCustom02").value,
@@ -139,18 +133,34 @@ btnEnvoiFormulaire.addEventListener("click", (e) => {
   } else {
     alert("Veuillez bien remplir le formulaire");
   }
+  const btnEnvoiFormulaire = document.querySelector("#btnformulaire");
+
+btnEnvoiFormulaire.addEventListener("click", (e) => {
+  e.preventDefault();
   //------ Commande + Formulaire à envoyer
+  let products = [];
+
+  for (l = 0; l < produitLocalStorage.length; l++) {
+    products.push(produitLocalStorage[l].productId);
+  };
   const envoiCommandeServeur = {
     contact,
     products,
   };
-    //Envoie vers le Serveur
-    const envoieServeur = fetch("http://localhost:3000/api/teddies/order", {
+    const envoieServeur = {
         method: "POST",
         body: JSON.stringify(envoiCommandeServeur),
         headers: {
           'Content-Type': 'application/json; charset=utf-8',
         },
-    }); 
-    console.log(envoieServeur);
+      };
+      fetch(`http://localhost:3000/api/teddies/order`, envoieServeur)
+      .then((response) => response.json())
+      .then((json) => {
+      console.log(json)
+      window.location.href = `${window.location.origin}/confirmation.html?orderId=${json.orderId}`
+      })
+      .catch(() => {
+        alert(error)
+      })
 });

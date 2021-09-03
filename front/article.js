@@ -46,7 +46,7 @@ btn_envoyerPanier.addEventListener("click", (event)=>{
   }
   ///-----local storage
   ///-- declaration variable ou je met les key et verification si présence de clé dans le local
- let products = JSON.parse(localStorage.getItem("products"));
+ let produitLocalStorage = JSON.parse(localStorage.getItem("produitLocalStorage"));
  //---Fenete de confirmation 
  const popupConfirmation = () =>{
    if(window.confirm( `${cardTitle.textContent} à bien été ajouté au panier 
@@ -57,15 +57,15 @@ window.location.href = "cart.html";
    }
  }
  //--- si local pas vide
- if(products){
-  products.push(produit);
-  localStorage.setItem("products", JSON.stringify(products))
+ if(produitLocalStorage){
+  produitLocalStorage.push(produit);
+  localStorage.setItem("produitLocalStorage", JSON.stringify(produitLocalStorage))
   popupConfirmation()
  } //---si il n'y pas pas de key dans le local
  else{
-  products = [];
-  products.push(produit);
-  localStorage.setItem("products", JSON.stringify(products))
+  produitLocalStorage = [];
+  produitLocalStorage.push(produit);
+  localStorage.setItem("produitLocalStorage", JSON.stringify(produitLocalStorage))
   popupConfirmation()
  }
 });

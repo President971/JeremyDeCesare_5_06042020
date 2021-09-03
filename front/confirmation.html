@@ -23,9 +23,7 @@
     <!-- Navigation-->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
       <div class="container px-4 px-lg-5">
-        <a class="navbar-brand" href="http://127.0.0.1:5500/front/index.html#!"
-          >Accueil</a
-        >
+        <a class="navbar-brand" href="index.html">Accueil</a>
         <button
           class="navbar-toggler"
           type="button"
@@ -40,16 +38,15 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="#!">Home</a>
+              <a class="nav-link active" aria-current="page">Home</a>
             </li>
           </ul>
-          <form class="d-flex">
+          <a class="d-flex" href="cart.html">
             <button class="btn btn-outline-dark" type="submit">
               <i class="bi-cart-fill me-1"></i>
               Cart
-              <span class="badge bg-dark text-white ms-1 rounded-pill">0</span>
             </button>
-          </form>
+          </a>
         </div>
       </div>
     </nav>
@@ -66,20 +63,40 @@
     </header>
     <!-- Section-->
     <section class="py-5 px-5">
-      <main>
-        <div class="recap">
-          <div class="confirm">
-            <h2>Votre commande a bien été prise en compte</h2>
-            <p class="total">
-              Le montant total est de <span class="display-price"></span>
-            </p>
-            <p class="orderid">
-              Votre numéro de commande est :
-              <span class="display-orderid"></span>
-            </p>
+      <div class="container px-4 px-lg-5 mt-5">
+        <div
+          class="
+            row
+            gx-4 gx-lg-5
+            row-cols-2 row-cols-md-3 row-cols-xl-4
+            justify-content-center
+          "
+          id="card"
+        >
+          <div class="card p-3" style="width: 18rem">
+            <img
+              src="localhost:3000/api/teddies"
+              class="card-img-top"
+              alt=""
+              id="cardImg"
+            />
+            <div class="card-body">
+              <h5 class="card-title" id="cardTitle"></h5>
+              <p class="card-text" id="cardBody"></p>
+              <p class="card-text" id="cardPrice"></p>
+              <div class="grid w-full gap-4 mt-4">
+                <div class="product-card__infos__color">
+                  <label for="color-select"> Couleur :</label>
+                  <select name="color" id="productColor">
+                  </select>
+                  <a class="btn btn-success mt-4" id="addToCart" id="cardPanier" id="article_link">Ajouter au panier</a>
+                  <a href="index.html" class="btn btn-danger mt-3" id="cardPanier" id="article_link">Revenir aux Nounours</a>
+                </div>
+              </div>
+              </div>
           </div>
         </div>
-      </main>
+      </div>
     </section>
     <!-- Footer-->
     <footer class="py-5 px-auto bg-dark">
@@ -92,6 +109,6 @@
     <!-- Bootstrap core JS-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Core theme JS-->
-    <script src="article.js"></script>
+    <script src="confirmation.js"></script>
   </body>
 </html>
