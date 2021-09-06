@@ -160,7 +160,7 @@ if (nomControle() && prenomControle() && villeControle() && adresseControle () &
       .then((response) => response.json())
       .then((json) => {
       console.log(json)
-      localStorage.removeItem('produitlocalStorage')
+      localStorage.clear();
       window.location.href = `${window.location.origin}/front/confirmation.html?orderId=${json.orderId}`
       })
       .catch(() => {
