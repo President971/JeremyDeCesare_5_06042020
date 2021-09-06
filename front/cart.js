@@ -36,7 +36,7 @@ if (produitLocalStorage === null) {
   //----Suppression de la Key du local Storage
 
   btnclear.addEventListener("click", () => {
-    localStorage.removeItem("produitLocalStorage");
+    localStorage.clear();
     window.location.href = "cart.html";
   });
 }
@@ -52,6 +52,9 @@ for (k = 0; k < produitLocalStorage.length; k++) {
 //----Addition des prix du tableau avec .reduce
 const reducer = (accumulator, currentValue) => accumulator + currentValue;
 const prixTotal = prixTotalCalcul.reduce(reducer);
+
+localStorage.setItem("prixTotal", JSON.stringify(prixTotal));
+
 //----Html du Total
 const affichagePrixTotal = ` <div> Le prix total est de : ${prixTotal} € </div>
 `;
@@ -136,34 +139,35 @@ function emailControle() {
 //-----Verification globale avant envoie
 if (nomControle() && prenomControle() && villeControle() && adresseControle () && emailControle()) {
   localStorage.setItem("contact", JSON.stringify(contact));
+
+    //------ Commande + Formulaire à envoyer
+    let products = [];
+
+    for (l = 0; l < produitLocalStorage.length; l++) {
+      products.push(produitLocalStorage[l].productId);
+    };
+    const envoiCommandeServeur = {
+      contact,
+      products,
+    };
+      const envoieServeur = {
+          method: "POST",
+          body: JSON.stringify(envoiCommandeServeur),
+          headers: {
+            'Content-Type': 'application/json; charset=utf-8',
+          },
+        };
+        fetch(`http://localhost:3000/api/teddies/order`, envoieServeur)
+        .then((response) => response.json())
+        .then((json) => {
+        console.log(json)
+        window.location.href = `${window.location.origin}/front/confirmation.html?orderId=${json.orderId}`
+        })
+        .catch(() => {
+          alert(error)
+        })
+
 } else {
   alert("Veuillez bien remplir le formulaire");
 };
-  //------ Commande + Formulaire à envoyer
-  let products = [];
-
-  for (l = 0; l < produitLocalStorage.length; l++) {
-    products.push(produitLocalStorage[l].productId);
-  };
-  const envoiCommandeServeur = {
-    contact,
-    products,
-  };
-    const envoieServeur = {
-        method: "POST",
-        body: JSON.stringify(envoiCommandeServeur),
-        headers: {
-          'Content-Type': 'application/json; charset=utf-8',
-        },
-      };
-      fetch(`http://localhost:3000/api/teddies/order`, envoieServeur)
-      .then((response) => response.json())
-      .then((json) => {
-      console.log(json)
-      localStorage.clear();
-      window.location.href = `${window.location.origin}/front/confirmation.html?orderId=${json.orderId}`
-      })
-      .catch(() => {
-        alert(error)
-      })
 });
