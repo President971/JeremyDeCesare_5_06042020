@@ -56,87 +56,89 @@ const prixTotal = prixTotalCalcul.reduce(reducer);
 const affichagePrixTotal = ` <div> Le prix total est de : ${prixTotal} € </div>
 `;
 positionProduit.insertAdjacentHTML("afterend", affichagePrixTotal);
-
-//----------------- Recupération du Formulaire pour mettre dans le local storage-----------------
-  const contact = {
-    firstName: document.querySelector("#validationCustom01").value,
-    lastName: document.querySelector("#validationCustom02").value,
-    address: document.querySelector("#validationCustom03").value,
-    city : document.querySelector("#validationCustom04").value,
-    email: document.querySelector("#validationCustom05").value,
-  };
-  //---------------Controle Validation du Formulaire
-  //----------------Regex et Alert
-  const textAlert = (value) => {
-    return `${value} \n Chiffre et symbole ne sont pas autorisé \n Minimum 3 caractères et maximum 20 caractères`;
-  };
-  const regexNomPrenomVille = (value) => {
-    return /^[A-Z a-z]{3,20}$/.test(value);
-  };
-  const regexAdresse = (value) => {
-    return /^[0-9 A-Z  a-z]{1,100}$/.test(value);
-  };
-  const regexEmail = (value) => {
-    return /^[\w-\.]+@([\w-]+\.)+[\w-]{2,20}$/.test(value);
-  };
-
-  function nomControle() {
-    const leNom = contact.firstName;
-    if (regexNomPrenomVille(leNom)) {
-      return true;
-    } else {
-      alert(textAlert(" Problème avec votre Nom"));
-      return false;
-    }
-  }
-  function prenomControle() {
-    const lePrenom = contact.lastName;
-    if (regexNomPrenomVille(lePrenom)) {
-      return true;
-    } else {
-      alert(textAlert(" Problème avec votre Prenom"));
-      return false;
-    }
-  }
-  function villeControle() {
-    const laVille = contact.city;
-    if (regexNomPrenomVille(laVille)) {
-      return true;
-    } else {
-      alert(textAlert(" Problème avec votre Ville"));
-      return false;
-    }
-  }
-
-  function adresseControle() {
-    const lAdresse = contact.address;
-    if (regexAdresse(lAdresse)) {
-      return true;
-    } else {
-      alert(" Problème avec votre Adresse \n Ne pas mettre de caractère spéciaux");
-      return false;
-    }
-  }
-
-  function emailControle() {
-    const lEmail = contact.email;
-    if (regexEmail(lEmail)) {
-      return true;
-    } else {
-      alert(" Problème avec votre Email");
-      return false;
-    }
-  }
-  //-----Verification globale avant envoie
-  if (nomControle() && prenomControle() && villeControle() && adresseControle () && emailControle()) {
-    localStorage.setItem("contact", JSON.stringify(contact));
-  } else {
-    alert("Veuillez bien remplir le formulaire");
-  }
-  const btnEnvoiFormulaire = document.querySelector("#btnformulaire");
+const btnEnvoiFormulaire = document.querySelector("#btnformulaire");
 
 btnEnvoiFormulaire.addEventListener("click", (e) => {
-  e.preventDefault();
+e.preventDefault();
+
+//----------------- Recupération du Formulaire pour mettre dans le local storage-----------------
+const contact = {
+  firstName: document.querySelector("#validationCustom01").value,
+  lastName: document.querySelector("#validationCustom02").value,
+  address: document.querySelector("#validationCustom03").value,
+  city : document.querySelector("#validationCustom04").value,
+  email: document.querySelector("#validationCustom05").value,
+};
+
+const textAlert = (value) => {
+  return `${value} \n Chiffre et symbole ne sont pas autorisé \n Minimum 3 caractères et maximum 20 caractères`;
+};
+const regexNomPrenomVille = (value) => {
+  return /^[A-Z a-z]{3,20}$/.test(value);
+};
+const regexAdresse = (value) => {
+  return /^[0-9 A-Z  a-z]{1,100}$/.test(value);
+};
+const regexEmail = (value) => {
+  return /^[\w-\.]+@([\w-]+\.)+[\w-]{2,20}$/.test(value);
+};
+//---------------Controle Validation du Formulaire
+function nomControle() {
+  const leNom = contact.firstName;
+  if (regexNomPrenomVille(leNom)) {
+    return true;
+  } else {
+    alert(textAlert(" Problème avec votre Nom"));
+    return false;
+  }
+};
+
+function prenomControle() {
+  const lePrenom = contact.lastName;
+  if (regexNomPrenomVille(lePrenom)) {
+    return true;
+  } else {
+    alert(textAlert(" Problème avec votre Prenom"));
+    return false;
+  }
+};
+
+function villeControle() {
+  const laVille = contact.city;
+  if (regexNomPrenomVille(laVille)) {
+    return true;
+  } else {
+    alert(textAlert(" Problème avec votre Ville"));
+    return false;
+  }
+};
+
+function adresseControle() {
+  const lAdresse = contact.address;
+  if (regexAdresse(lAdresse)) {
+    return true;
+  } else {
+    alert(" Problème avec votre Adresse \n Ne pas mettre de caractère spéciaux");
+    return false;
+  }
+};
+
+function emailControle() {
+  const lEmail = contact.email;
+  if (regexEmail(lEmail)) {
+    return true;
+  } else {
+    alert(" Problème avec votre Email");
+    return false;
+  }
+};
+
+//-----Verification globale avant envoie
+if (nomControle() && prenomControle() && villeControle() && adresseControle () && emailControle()) {
+  localStorage.setItem("contact", JSON.stringify(contact));
+} else {
+  alert("Veuillez bien remplir le formulaire");
+};
   //------ Commande + Formulaire à envoyer
   let products = [];
 
@@ -158,7 +160,8 @@ btnEnvoiFormulaire.addEventListener("click", (e) => {
       .then((response) => response.json())
       .then((json) => {
       console.log(json)
-      window.location.href = `${window.location.origin}/confirmation.html?orderId=${json.orderId}`
+      localStorage.removeItem('produitlocalStorage')
+      window.location.href = `${window.location.origin}/front/confirmation.html?orderId=${json.orderId}`
       })
       .catch(() => {
         alert(error)
