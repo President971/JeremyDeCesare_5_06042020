@@ -20,47 +20,10 @@
     <link href="css/styles.css" rel="stylesheet" />
   </head>
   <body>
-    <!-- Navigation-->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <div class="container px-4 px-lg-5">
-        <a class="navbar-brand" href="index.html">Accueil</a>
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarSupportedContent"
-          aria-controls="navbarSupportedContent"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
-            <li class="nav-item">
-              <a class="nav-link active" aria-current="page">Home</a>
-            </li>
-          </ul>
-          <a class="d-flex" href="cart.html">
-            <button class="btn btn-outline-dark" type="submit">
-              <i class="bi-cart-fill me-1"></i>
-              Cart
-            </button>
-          </a>
-        </div>
-      </div>
-    </nav>
     <!-- Header-->
-    <header class="bg-dark py-5">
-      <div class="container px-4 px-lg-5 my-5">
-        <div class="text-center text-white">
-          <h1 class="display-4 fw-bolder">ORINOCO</h1>
-          <p class="lead fw-normal text-white-50 mb-0">
-            Le meilleur endroit pour s'acheter du nounours
-          </p>
-        </div>
-      </div>
-    </header>
+    <header class="row align-items-center">
+      <img src="/images/logo.png" alt="Bootstrap" class="img-responsive" style="height: 24rem;"> 
+  </header>
     <!-- Section-->
     <section class="py-5 px-5">
       <div class="container px-4 px-lg-5 mt-5">
@@ -73,20 +36,12 @@
           "
           id="card"
         >
-          <div class="card p-3" style="width: 18rem">
-            <img
-              src="localhost:3000/api/teddies"
-              class="card-img-top"
-              alt=""
-              id="cardImg"
-            />
+          <div class="card p-3" style="width: 22rem">
             <div class="card-body">
               <h5 class="card-title" id="cardTitle"> Félicitation, votre commande à bien été prise en compte pour un montant total de : <span id="prixtotal"></span> €</p> </h4>
               <p> Identifiant de votre commande : <span id="commandId"></span></p>
               <div class="grid w-full gap-4 mt-4">
                   <a href="index.html" class="btn btn-success mt-3" id="cardAccueil" id="article_link">Revenir à l'Accueil</a>
-                </div>
-              </div>
               </div>
           </div>
         </div>
@@ -96,7 +51,7 @@
     <footer class="py-5 px-auto bg-dark">
       <div class="container">
         <p class="m-0 text-center text-white">
-          Copyright &copy; Your Website 2021
+          Copyright &copy; President971
         </p>
       </div>
     </footer>
