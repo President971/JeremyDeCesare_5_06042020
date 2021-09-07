@@ -27,50 +27,87 @@
       </div>
     </nav>
     <!-- Header-->
-    <header class="row align-items-center">
-      <img src="/images/logo.png" alt="Bootstrap" class="img-responsive" style="height: 32rem;"> 
-  </header>
-    <!-- Section--> 
-    <section class="px-4 px-lg-5 my-5">
-      <table class="table table-hover table-sm table align-middle table-responsive">
-        <thead id="tableau">
-          <tr>
-            <th scope="col">Nounours</th>
-            <th scope="col">Prix</th>
-          </tr>
-        </thead>
-        <tbody id="tableProduit">
-        </tbody>
-      </table>
+    <header class="bg-secondary py-5 text-align text-center">
+      <img src="/images/logo.png" alt="Bootstrap" class="img-fluid max-width: 100%; height: auto">
+    </header>
+    <!-- Section Panier-->
+    <section class="container px-5 px-lg-5 my-5">
+      <div class="row align-items-start">
+        <div class="col-3"></div>
+        <table
+          class="
+            col
+            table table-hover table-sm table
+            align-middle
+            table-responsive
+          "
+        >
+          <thead id="tableau">
+            <tr>
+              <th scope="col">Nounours</th>
+              <th scope="col">Prix</th>
+            </tr>
+          </thead>
+          <tbody id="tableProduit"></tbody>
+        </table>
+        <div class="col-3"></div>
+      </div>
     </section>
-    <section class="px-4 px-lg-5 my-5">
+    <section class="container px-4 px-lg-5 my-5">
       <form class="row g-3 needs-validation">
-        <div class="col-md-3">
+        <div class="col-md-4">
           <label for="validationCustom01" class="form-label">Nom</label>
-          <input type="text" class="form-control" id="validationCustom01" required>
+          <input
+            type="text"
+            class="form-control"
+            id="validationCustom01"
+            required
+          />
         </div>
-        <div class="col-md-3">
+        <div class="col-md-4">
           <label for="validationCustom02" class="form-label">Prénom</label>
-          <input type="text" class="form-control" id="validationCustom02" required>
+          <input
+            type="text"
+            class="form-control"
+            id="validationCustom02"
+            required
+          />
         </div>
-        <div class="col-md-3">
+        <div class="col-md-4">
           <label for="validationCustom03" class="form-label">Adresse</label>
-          <input type="text" class="form-control" id="validationCustom03" required>
+          <input
+            type="text"
+            class="form-control"
+            id="validationCustom03"
+            required
+          />
         </div>
-        <div class="col-md-3">
+        <div class="col-md-4">
           <label for="validationCustom05" class="form-label">Ville</label>
-          <input type="text" class="form-control" id="validationCustom04" required>
+          <input
+            type="text"
+            class="form-control"
+            id="validationCustom04"
+            required
+          />
         </div>
-        <div class="col-md-3">
+        <div class="col-md-4">
           <label for="validationCustom03" class="form-label">E-Mail</label>
-          <input type="text" class="form-control" id="validationCustom05" required>
+          <input
+            type="text"
+            class="form-control"
+            id="validationCustom05"
+            required
+          />
         </div>
         <div class="col-12">
-          <button class="btn btn-primary" type="submit" id="btnformulaire">Commander</button>
+          <button class="btn btn-primary" type="submit" id="btnformulaire">
+            Commander
+          </button>
         </div>
       </form>
-    </section>          
-    <footer class="py-5 px-auto bg-dark">
+    </section>
+    <footer class="py-5 px-auto bg-secondary">
       <div class="container">
         <p class="m-0 text-center text-white">Copyright &copy; President971</p>
       </div>

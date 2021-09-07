@@ -33,9 +33,20 @@ function hydrateArticle(article){
    colorSelect.appendChild(option);
 }
 }
+//-----TOAST Bootstrap-----Fenete de confirmation 
+var toastTrigger = document.getElementById('liveToastBtn')
+var toastLiveExample = document.getElementById('liveToast')
+if (toastTrigger) {
+  toastTrigger.addEventListener('click', function () {
+    var toast = new bootstrap.Toast(toastLiveExample)
+
+    toast.show()
+  })
+}
+
 //selection du bouton ajouter au panier et l'ecouter
 
-const btn_envoyerPanier = document.querySelector("#addToCart");
+const btn_envoyerPanier = document.querySelector("#liveToastBtn");
 
 btn_envoyerPanier.addEventListener("click", (event)=>{
   event.preventDefault();
@@ -47,20 +58,14 @@ btn_envoyerPanier.addEventListener("click", (event)=>{
   ///-----local storage
   ///-- declaration variable ou je met les key et verification si présence de clé dans le local
  let produitLocalStorage = JSON.parse(localStorage.getItem("produitLocalStorage"));
- //---Fenete de confirmation 
- const popupConfirmation = () =>{
-   if(window.confirm( `${cardTitle.textContent} à bien été ajouté au panier`)){
- }}
  //--- si local pas vide
  if(produitLocalStorage){
   produitLocalStorage.push(produit);
   localStorage.setItem("produitLocalStorage", JSON.stringify(produitLocalStorage))
-  popupConfirmation()
  } //---si il n'y pas pas de key dans le local
  else{
   produitLocalStorage = [];
   produitLocalStorage.push(produit);
   localStorage.setItem("produitLocalStorage", JSON.stringify(produitLocalStorage))
-  popupConfirmation()
  }
 });
