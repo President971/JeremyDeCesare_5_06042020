@@ -166,7 +166,7 @@ if (nomControle() && prenomControle() && villeControle() && adresseControle () &
         .catch(() => {
           alert(error)
         })
-
+z
 } else {
   alert("Veuillez bien remplir le formulaire");
 };
