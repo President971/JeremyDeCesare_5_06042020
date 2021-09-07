@@ -6,6 +6,7 @@ const positionTable = document.querySelector("#tableau");
 //-------Affichage des produits du Panier----
 
 // Si Panier est vide
+
 if (produitLocalStorage === null) {
   const panierVide = `<h2>Votre panier est vide. <a href="index.html">Remplissez le d'abord !</a></h2>`;
   positionProduit.innerHTML = panierVide;
@@ -166,7 +167,6 @@ if (nomControle() && prenomControle() && villeControle() && adresseControle () &
         .catch(() => {
           alert(error)
         })
-z
 } else {
   alert("Veuillez bien remplir le formulaire");
 };
