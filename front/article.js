@@ -18,6 +18,7 @@ function getArticle(articleId) {
       alert(error)
     })
 }
+//---Creer les articles avec l'API
 
 function hydrateArticle(article){
  document.getElementById("cardImg").src = article.imageUrl;
