@@ -11,7 +11,6 @@
 //---Vidage du Local Storage automatique et retour à l'acceuil
 
 const retouracceuil = document.querySelector("#cardAccueil");
-retouracceuil.addEventListener("click", (e) => {
-  e.preventDefault();
+retouracceuil.addEventListener("click", () => {
   localStorage.clear();
 });
