@@ -1,5 +1,5 @@
 //------Affichage de l'ID et du prix total
-
+//fonction en ES6
 (() => {
   const orderId =
     new URL(location.href).searchParams.get("orderId") || "ERREUR";
@@ -12,5 +12,6 @@
 
 const retouracceuil = document.querySelector("#cardAccueil");
 retouracceuil.addEventListener("click", (e) => {
+  e.preventDefault();
   localStorage.clear();
 });
