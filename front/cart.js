@@ -62,12 +62,11 @@ localStorage.setItem("prixTotal", JSON.stringify(prixTotal));
 const affichagePrixTotal = ` <div> Le prix total est de : ${prixTotal} € </div>
 `;
 positionProduit.insertAdjacentHTML("afterend", affichagePrixTotal);
-const btnEnvoiFormulaire = document.querySelector("#btnformulaire");
-
-btnEnvoiFormulaire.addEventListener("click", (e) => {
-  e.preventDefault();
 
   //----------------- Recupération du Formulaire pour mettre dans le local storage-----------------
+const btnEnvoiFormulaire = document.querySelector("#btnformulaire");
+btnEnvoiFormulaire.addEventListener("click", (e) => {
+  e.preventDefault();
   const contact = {
     firstName: document.querySelector("#validationCustom01").value,
     lastName: document.querySelector("#validationCustom02").value,
